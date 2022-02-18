@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Todos, TodosStatus } from './todos';
+import { Todos, TodosStatus, TodosSort, TodosLimit} from './todos';
 
 @Injectable()
 export class TodosService {
@@ -10,10 +10,13 @@ export class TodosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTodos(filters?: { status?: TodosStatus}): Observable<Todos[]> {
+  getTodos(filters?: { status?: TodosStatus; sort?: TodosSort}): Observable<Todos[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters.status) {
       httpParams = httpParams.set('status', filters.status);
+    }
+    if (filters.sort) {
+      httpParams = httpParams.set('sort', filters.sort);
     }
     return this.httpClient.get<Todos[]>(this.todosUrl, {
       params: httpParams,
@@ -24,7 +27,7 @@ export class TodosService {
     return this.httpClient.get<Todos>(this.todosUrl + '/' + id);
   }
 
-  filterTodos(todos: Todos[], filters: {owner?: string; body?: string; category?: string }): Todos[] {
+  filterTodos(todos: Todos[], filters: {owner?: string; body?: string; category?: string; limit?: number}): Todos[] {
     let filteredTodos = todos;
 
     if(filters.owner) {
@@ -41,6 +44,10 @@ export class TodosService {
       filters.category = filters.category.toLowerCase();
       filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
     }
+
+    // if(filters.limit) {
+      // filteredTodos = filteredTodos.splice(0, todo.limit);
+    // }
 
     return filteredTodos;
   }

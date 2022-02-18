@@ -27,7 +27,6 @@
           <mat-form-field class="input-field">
             <mat-label>Status</mat-label>
             <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todosStatus" data-test="todosStatusSelect">
-            min="0" max="200" [(ngModel)]="todosStatus" (input)="getTodosFromServer()">
             <mat-option>--</mat-option>
               <mat-option value="complete">Complete</mat-option>
               <mat-option value="incomplete">Incomplete</mat-option>
@@ -44,12 +43,33 @@
         </div>
 
         <br>
-        <div fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="left center">
           <label>View type: </label>
           <mat-radio-group aria-label="View type" [(ngModel)]="viewType" data-test="viewTypeRadio">
             <mat-radio-button value="card">Card</mat-radio-button>
             <mat-radio-button value="list">List</mat-radio-button>
           </mat-radio-group>
+          <mat-form-field class="input-field">
+            <mat-label>Sort: </mat-label>
+            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todosSort" data-test="todosSortSelect" >
+              <mat-option>--</mat-option>
+                <mat-option value="Owner">Owner</mat-option>
+                <mat-option value="Body">Body</mat-option>
+                <mat-option value="Category">Category</mat-option>
+                <mat-option value="Status">Status</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="input-field">
+            <mat-label>Display: </mat-label>
+            <mat-select [(ngModel)]="todosLimit" data-test="todosLimitSelect" (selectionChange)="updateFilter()">
+              <mat-option>--</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="10">10</mat-option>
+                <mat-option value="20">20</mat-option>
+                <mat-option value="50">50</mat-option>
+                <mat-option value="100">100</mat-option>
+              </mat-select>
+          </mat-form-field>
         </div>
 
       </mat-card-content>
@@ -74,7 +94,7 @@
             <h3 mat-subheader>Todos</h3>
             <a mat-list-item *ngFor="let todos of this.filteredTodos" [routerLink]="['/todos', todos._id]" class="todos-list-item">
               <h3 matLine class="todos-list-owner"> {{todos.owner}} </h3>
-              <p matLine class="todos-list-status"> {{todos.status}} </p>
+              <p matLine class="todos-list-category"> {{todos.category}} </p>
             </a>
           </mat-nav-list>
         </mat-card-content>

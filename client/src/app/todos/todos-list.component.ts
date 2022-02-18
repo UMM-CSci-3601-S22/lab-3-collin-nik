@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Todos, TodosStatus } from './todos';
+import { Todos, TodosStatus, TodosSort } from './todos';
 import { TodosService } from './todos.service';
 
 @Component({
@@ -20,12 +20,13 @@ export class TodosListComponent implements OnInit {
   public todosBody: string;
   public todosCategory: string;
   public viewType: 'card' | 'list' = 'card';
-
+  public todosLimit: number;
+  public todosSort: 'Owner'| 'Body' | 'Category' | 'Status' = 'Status';
   constructor(private todosService: TodosService, private snackBar: MatSnackBar) { }
 
   getTodosFromServer() {
     this.todosService.getTodos({
-      status: this.todosStatus
+      status: this.todosStatus, sort: this.todosSort
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
@@ -40,7 +41,7 @@ export class TodosListComponent implements OnInit {
 
   public updateFilter() {
     this.filteredTodos = this.todosService.filterTodos(
-      this.serverFilteredTodos, { owner: this.todosOwner, body: this.todosBody, category: this.todosCategory }
+      this.serverFilteredTodos, { owner: this.todosOwner, body: this.todosBody, category: this.todosCategory, limit: this.todosLimit }
     );
   }
 
