@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Todos, TodosStatus } from '.././todos';
-import { TodosService } from '.././todos.service';
+import { Todos, TodosStatus } from './todos';
+import { TodosService } from './todos.service';
 
 @Component({
   selector: 'app-todos-list',

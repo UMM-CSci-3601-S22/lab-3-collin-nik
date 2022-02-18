@@ -1,5 +1,5 @@
 import { Component, Input} from '@angular/core';
-import { Todos } from '.././todos';
+import { Todos } from './todos';
 
 @Component({
   selector: 'app-todos-card',
