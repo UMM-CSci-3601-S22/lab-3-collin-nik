@@ -45,9 +45,9 @@ export class TodosService {
       filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
     }
 
-    // if(filters.limit) {
-      // filteredTodos = filteredTodos.splice(0, todo.limit);
-    // }
+    if(filters.limit) {
+      filteredTodos = filteredTodos.slice(0, filters.limit);
+    }
 
     return filteredTodos;
   }
