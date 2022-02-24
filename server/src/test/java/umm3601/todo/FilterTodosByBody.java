@@ -16,7 +16,8 @@ import org.junit.jupiter.api.Test;
  */
 @SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByBody {
-
+String first = "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem";
+String last = " consectetur incididunt cupidatat laboris commodo veniam do ut sint.";
   @Test
   public void filterTodosByBody() throws IOException {
     TodoDatabase db = new TodoDatabase("/todos.json");
@@ -25,7 +26,7 @@ public class FilterTodosByBody {
     Todo[] incididuntTodos = db.filterTodosByBody(allTodos, "Incididunt");
     assertEquals(84, incididuntTodos.length, "Incorrect number of todos with body phrase Incididunt");
 
-    Todo[] incididunt2Todos = db.filterTodosByBody(allTodos, "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint.");
+    Todo[] incididunt2Todos = db.filterTodosByBody(allTodos, first + last);
     assertEquals(1, incididunt2Todos.length, "Incorrect number of todos with the specified body phrase");
   }
 
@@ -38,7 +39,7 @@ public class FilterTodosByBody {
     Todo[] incididuntTodos = db.listTodos(queryParams);
     assertEquals(300, incididuntTodos.length, "Incorrect number of todos with body phrase Incididunt");
 
-    queryParams.put("body", Arrays.asList(new String[] {"Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint."}));
+    queryParams.put("body", Arrays.asList(new String[] {first + last}));
     Todo[] incididunt2Todos = db.listTodos(queryParams);
     assertEquals(300, incididunt2Todos.length, "Incorrect number of todos with the specified body phrase");
   }
