@@ -35,12 +35,12 @@ private String last = " consectetur incididunt cupidatat laboris commodo veniam 
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("body", Arrays.asList(new String[] {"Incididunt"}));
+    queryParams.put("contains", Arrays.asList(new String[] {"Incididunt"}));
     Todo[] incididuntTodos = db.listTodos(queryParams);
-    assertEquals(300, incididuntTodos.length, "Incorrect number of todos with body phrase Incididunt");
+    assertEquals(84, incididuntTodos.length, "Incorrect number of todos with body phrase Incididunt");
 
-    queryParams.put("body", Arrays.asList(new String[] {first + last}));
+    queryParams.put("contains", Arrays.asList(new String[] {first + last}));
     Todo[] incididunt2Todos = db.listTodos(queryParams);
-    assertEquals(300, incididunt2Todos.length, "Incorrect number of todos with the specified body phrase");
+    assertEquals(1, incididunt2Todos.length, "Incorrect number of todos with the specified body phrase");
   }
 }

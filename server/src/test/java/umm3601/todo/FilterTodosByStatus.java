@@ -1,14 +1,14 @@
 package umm3601.todo;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// import java.io.IOException;
-// import java.util.Arrays;
-// import java.util.HashMap;
-// import java.util.List;
-// import java.util.Map;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-// import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests umm3601.todo.Database filterUsersByAge and listUsers with _age_ query
@@ -24,29 +24,29 @@ package umm3601.todo;
 @SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByStatus {
 
-  // @Test
-  // public void filterTodosByStatus() throws IOException {
-  //   TodoDatabase db = new TodoDatabase("/todos.json");
-  //   Todo[] allTodos = db.listTodos(new HashMap<>());
+  @Test
+  public void filterTodosByStatus() throws IOException {
+    TodoDatabase db = new TodoDatabase("/todos.json");
+    Todo[] allTodos = db.listTodos(new HashMap<>());
 
-  //   Todo[] age27Todos = db.filterTodosByStatus(allTodos, 27);
-  //   assertEquals(3, age27Todos.length, "Incorrect number of todos with a false status");
+    Todo[] falseTodos = db.filterTodosByStatus(allTodos, "incomplete");
+    assertEquals(157, falseTodos.length, "Incorrect number of todos with a false status");
 
-  //   Todo[] age33Todos = db.filterTodosByStatus(allTodos, 33);
-  //   assertEquals(1, age33Todos.length, "Incorrect number of todos with a true status");
-  // }
+    Todo[] trueTodos = db.filterTodosByStatus(allTodos, "complete");
+    assertEquals(143, trueTodos.length, "Incorrect number of todos with a true status");
+  }
 
-  // @Test
-  // public void listTodosWithStatusFilter() throws IOException {
-  //   TodoDatabase db = new TodoDatabase("/todos.json");
-  //   Map<Boolean, List<Boolean>> queryParams = new HashMap<>();
+  @Test
+  public void listTodosWithStatusFilter() throws IOException {
+    TodoDatabase db = new TodoDatabase("/todos.json");
+    Map<String, List<String>> queryParams = new HashMap<>();
 
-  //   queryParams.put("status", Arrays.asList(new boolean[] {false}));
-  //   Todo[] falseTodos = db.listTodos(queryParams);
-  //   assertEquals(3, falseTodos.length, "Incorrect number of todos with a false status");
+    queryParams.put("status", Arrays.asList(new String[] {"incomplete"}));
+    Todo[] falseTodos = db.listTodos(queryParams);
+    assertEquals(157, falseTodos.length, "Incorrect number of todos with a false status");
 
-  //   queryParams.put("status", Arrays.asList(new String[] {"true"}));
-  //   Todo[] trueTodos = db.listTodos(queryParams);
-  //   assertEquals(1, trueTodos.length, "Incorrect number of todos a true status");
-  // }
+    queryParams.put("status", Arrays.asList(new String[] {"complete"}));
+    Todo[] trueTodos = db.listTodos(queryParams);
+    assertEquals(143, trueTodos.length, "Incorrect number of todos a true status");
+  }
 }
