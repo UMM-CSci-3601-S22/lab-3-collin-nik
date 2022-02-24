@@ -17,28 +17,28 @@ import org.junit.jupiter.api.Test;
 public class FilterTodosByOwner {
 
   @Test
-  public void filterTodosByBody() throws IOException {
+  public void filterTodosByOwner() throws IOException {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
-    Todo[] ohmnetTodos = db.filterTodosByBody(allTodos, "OHMNET");
-    assertEquals(2, ohmnetTodos.length, "Incorrect number of todos with company OHMNET");
+    Todo[] blancheTodos = db.filterTodosByOwner(allTodos, "Blanche");
+    assertEquals(43, blancheTodos.length, "Incorrect number of todos with owner Blanche");
 
-    Todo[] kineticutTodos = db.filterTodosByBody(allTodos, "KINETICUT");
-    assertEquals(1, kineticutTodos.length, "Incorrect number of todos with company KINETICUT");
+    Todo[] fryTodos = db.filterTodosByOwner(allTodos, "Fry");
+    assertEquals(61, fryTodos.length, "Incorrect number of todos with company Fry");
   }
 
   @Test
-  public void listTodosWithCompanyFilter() throws IOException {
+  public void listTodosWithOwnerFilter() throws IOException {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("company", Arrays.asList(new String[] {"OHMNET"}));
-    Todo[] ohmnetTodos = db.listTodos(queryParams);
-    assertEquals(2, ohmnetTodos.length, "Incorrect number of todos with company KINETICUT");
+    queryParams.put("owner", Arrays.asList(new String[] {"Blanche"}));
+    Todo[] blancheTodos = db.listTodos(queryParams);
+    assertEquals(43, blancheTodos.length, "Incorrect number of todos with owner Blanche");
 
-    queryParams.put("company", Arrays.asList(new String[] {"KINETICUT"}));
-    Todo[] kineticutTodos = db.listTodos(queryParams);
-    assertEquals(1, kineticutTodos.length, "Incorrect number of todos with company KINETICUT");
+    queryParams.put("owner", Arrays.asList(new String[] {"Fry"}));
+    Todo[] fryTodos = db.listTodos(queryParams);
+    assertEquals(61, fryTodos.length, "Incorrect number of todos with owner Fry");
   }
 }

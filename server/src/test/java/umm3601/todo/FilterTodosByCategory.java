@@ -17,15 +17,15 @@ import org.junit.jupiter.api.Test;
 public class FilterTodosByCategory {
 
   @Test
-  public void filterTodosByBody() throws IOException {
+  public void filterTodosByCategory() throws IOException {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
-    Todo[] ohmnetTodos = db.filterTodosByBody(allTodos, "OHMNET");
-    assertEquals(2, ohmnetTodos.length, "Incorrect number of todos with company OHMNET");
+    Todo[] groceryTodos = db.filterTodosByCategory(allTodos, "groceries");
+    assertEquals(76, groceryTodos.length, "Incorrect number of todos with category groceries");
 
-    Todo[] kineticutTodos = db.filterTodosByBody(allTodos, "KINETICUT");
-    assertEquals(1, kineticutTodos.length, "Incorrect number of todos with company KINETICUT");
+    Todo[] homeworkTodos = db.filterTodosByCategory(allTodos, "homework");
+    assertEquals(79, homeworkTodos.length, "Incorrect number of todos with category homework");
   }
 
   @Test
@@ -33,12 +33,12 @@ public class FilterTodosByCategory {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("company", Arrays.asList(new String[] {"OHMNET"}));
-    Todo[] ohmnetTodos = db.listTodos(queryParams);
-    assertEquals(2, ohmnetTodos.length, "Incorrect number of todos with company KINETICUT");
+    queryParams.put("category", Arrays.asList(new String[] {"groceries"}));
+    Todo[] groceryTodos = db.listTodos(queryParams);
+    assertEquals(76, groceryTodos.length, "Incorrect number of todos with category groceries");
 
-    queryParams.put("company", Arrays.asList(new String[] {"KINETICUT"}));
-    Todo[] kineticutTodos = db.listTodos(queryParams);
-    assertEquals(1, kineticutTodos.length, "Incorrect number of todos with company KINETICUT");
+    queryParams.put("category", Arrays.asList(new String[] {"homework"}));
+    Todo[] homeworkTodos = db.listTodos(queryParams);
+    assertEquals(79, homeworkTodos.length, "Incorrect number of todos with category homework");
   }
 }

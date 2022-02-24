@@ -21,11 +21,11 @@ public class FilterTodosByBody {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
-    Todo[] ohmnetTodos = db.filterTodosByBody(allTodos, "OHMNET");
-    assertEquals(2, ohmnetTodos.length, "Incorrect number of todos with company OHMNET");
+    Todo[] incididuntTodos = db.filterTodosByBody(allTodos, "Incididunt");
+    assertEquals(84, incididuntTodos.length, "Incorrect number of todos with body phrase Incididunt");
 
-    Todo[] kineticutTodos = db.filterTodosByBody(allTodos, "KINETICUT");
-    assertEquals(1, kineticutTodos.length, "Incorrect number of todos with company KINETICUT");
+    Todo[] incididunt2Todos = db.filterTodosByBody(allTodos, "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint.");
+    assertEquals(1, incididunt2Todos.length, "Incorrect number of todos with the specified body phrase");
   }
 
   @Test
@@ -33,12 +33,12 @@ public class FilterTodosByBody {
     TodoDatabase db = new TodoDatabase("/todos.json");
     Map<String, List<String>> queryParams = new HashMap<>();
 
-    queryParams.put("company", Arrays.asList(new String[] {"OHMNET"}));
-    Todo[] ohmnetTodos = db.listTodos(queryParams);
-    assertEquals(2, ohmnetTodos.length, "Incorrect number of todos with company KINETICUT");
+    queryParams.put("body", Arrays.asList(new String[] {"Incididunt"}));
+    Todo[] incididuntTodos = db.listTodos(queryParams);
+    assertEquals(300, incididuntTodos.length, "Incorrect number of todos with body phrase Incididunt");
 
-    queryParams.put("company", Arrays.asList(new String[] {"KINETICUT"}));
-    Todo[] kineticutTodos = db.listTodos(queryParams);
-    assertEquals(1, kineticutTodos.length, "Incorrect number of todos with company KINETICUT");
+    queryParams.put("body", Arrays.asList(new String[] {"Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint."}));
+    Todo[] incididunt2Todos = db.listTodos(queryParams);
+    assertEquals(300, incididunt2Todos.length, "Incorrect number of todos with the specified body phrase");
   }
 }

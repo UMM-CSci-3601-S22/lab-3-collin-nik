@@ -30,23 +30,23 @@ public class FilterTodosByStatus {
     Todo[] allTodos = db.listTodos(new HashMap<>());
 
     Todo[] age27Todos = db.filterTodosByStatus(allTodos, 27);
-    assertEquals(3, age27Todos.length, "Incorrect number of todos with age 27");
+    assertEquals(3, age27Todos.length, "Incorrect number of todos with a false status");
 
     Todo[] age33Todos = db.filterTodosByStatus(allTodos, 33);
-    assertEquals(1, age33Todos.length, "Incorrect number of todos with age 33");
+    assertEquals(1, age33Todos.length, "Incorrect number of todos with a true status");
   }
 
   @Test
-  public void listTodosWithAgeFilter() throws IOException {
+  public void listTodosWithStatusFilter() throws IOException {
     TodoDatabase db = new TodoDatabase("/todos.json");
-    Map<String, List<String>> queryParams = new HashMap<>();
+    Map<Boolean, List<Boolean>> queryParams = new HashMap<>();
 
-    queryParams.put("age", Arrays.asList(new String[] {"27"}));
-    Todo[] age27Todos = db.listTodos(queryParams);
-    assertEquals(3, age27Todos.length, "Incorrect number of todos with age 27");
+    queryParams.put("status", Arrays.asList(new boolean[] {false}));
+    Todo[] falseTodos = db.listTodos(queryParams);
+    assertEquals(3, falseTodos.length, "Incorrect number of todos with a false status");
 
-    queryParams.put("age", Arrays.asList(new String[] {"33"}));
-    Todo[] age33Todos = db.listTodos(queryParams);
-    assertEquals(1, age33Todos.length, "Incorrect number of todos with age 33");
+    queryParams.put("status", Arrays.asList(new String[] {"true"}));
+    Todo[] trueTodos = db.listTodos(queryParams);
+    assertEquals(1, trueTodos.length, "Incorrect number of todos a true status");
   }
 }
