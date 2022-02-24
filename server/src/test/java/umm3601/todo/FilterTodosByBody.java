@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
  */
 @SuppressWarnings({ "MagicNumber" })
 public class FilterTodosByBody {
-String first = "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem";
-String last = " consectetur incididunt cupidatat laboris commodo veniam do ut sint.";
+private String first = "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem";
+private String last = " consectetur incididunt cupidatat laboris commodo veniam do ut sint.";
   @Test
   public void filterTodosByBody() throws IOException {
     TodoDatabase db = new TodoDatabase("/todos.json");
