@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Todos, TodosStatus, TodosSort, TodosLimit} from './todos';
+import { Todos, TodosStatus, TodosSort } from './todos';
 
 @Injectable()
 export class TodosService {
